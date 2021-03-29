@@ -2,13 +2,13 @@ package main
 
 import "fmt"
 
-// Create a new type of deck
-type deck [] string
+// Create a new type of deckType
+type deckType [] string
 
-func newDeck() deck {
-	cards := deck{}
+func newDeck() deckType {
+	cards := deckType{}
 	cardSuits := []string{"Spades", "Hearts", "Diamonds", "Clubs"}
-	cardValues := []string{"Ace", "Two", "Three", "Four"}
+	cardValues := []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King" }
 
 	for _, cardSuit := range cardSuits{ //the underscores mean that you know that there is a varible but you are not going to use it
 		for _, cardValue := range cardValues{
@@ -19,8 +19,12 @@ func newDeck() deck {
 	return cards
 }
 
-func (d deck) print() {
-	for i, card := range d {
+func (deck deckType) print() {
+	for i, card := range deck {
 		fmt.Println(i, card)
 	}
 }
+
+func deal(deck deckType, handSize int) (deckType, deckType) {
+	return deck[:handSize], deck[handSize:]
+} 
