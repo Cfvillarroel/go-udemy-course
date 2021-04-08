@@ -5,6 +5,8 @@ import (
 	"strings"
 	"io/ioutil"
 	"os"
+	"math/rand"
+	"time"
 )
 
 // Create a new type of deckType
@@ -53,4 +55,15 @@ func newDeckFromFile(filename string) deckType {
 
 	cardString := strings.Split(string(bs), ",")
 	return deckType(cardString)
+}
+
+func (deck deckType) shuffle(){
+	source := rand.NewSource(time.Now().UnixNano()) // generate random int64
+	r := rand.New(source) // generate the rand seed
+
+	for i := range deck { // shuffle the deck
+		newPosition := r.Intn(len(deck) - 1)
+
+		deck[i], deck[newPosition] = deck[newPosition], deck[i]
+	}
 }
